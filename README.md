@@ -12,11 +12,58 @@ To use the Data Encryption Standard (DES) algorithm for a practical application,
 4. DES applies initial and final permutations along with 16 rounds of substitution and permutation transformations to produce ciphertext.
 
 ## Program:
+```
+def encrypt(message, key):
+    encrypted_message = []
+    key_length = len(key)
+
+    for i in range(len(message)):
+        # XOR each character and store as encrypted
+        encrypted_char = chr(ord(message[i]) ^ ord(key[i % key_length]))
+        encrypted_message.append(encrypted_char)
+
+    return ''.join(encrypted_message)
 
 
+def decrypt(encrypted_message, key):
+    decrypted_message = []
+    key_length = len(key)
+
+    for i in range(len(encrypted_message)):
+        # XOR again with the same key to decrypt
+        decrypted_char = chr(ord(encrypted_message[i]) ^ ord(key[i % key_length]))
+        decrypted_message.append(decrypted_char)
+
+    return ''.join(decrypted_message)
 
 
+def main():
+    print("\n      *****Simulation of DES encryption and decryption*****\n")
+
+    # Get user input
+    message = input("Enter the message to encrypt: ")
+    key = input("Enter the encryption key: ")
+
+    # Encrypt
+    encrypted_message = encrypt(message, key)
+
+    # Print original and encrypted message
+    print("Original Message:", message)
+    print("Encrypted Message (in hex):", end=' ')
+    for char in encrypted_message:
+        print(f"{ord(char):02X}", end=' ')
+    print()
+
+    # Decrypt
+    decrypted_message = decrypt(encrypted_message, key)
+    print("Decrypted Message:", decrypted_message)
+
+
+if __name__ == "__main__":
+    main()
+```
 ## Output:
+![image](https://github.com/user-attachments/assets/9e17293f-dc36-4afa-90d7-922122a8ee04)
 
 
 ## Result:
